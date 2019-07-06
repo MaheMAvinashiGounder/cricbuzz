@@ -52,7 +52,7 @@ public void liveMatch() throws IOException
 @AfterTest//to close browser
 public void afterTest()
 {
-	driver.close();
+	//driver.close();
 }
 
 }

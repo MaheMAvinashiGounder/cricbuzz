@@ -16,20 +16,16 @@ public class LiveScore
 	public void liveMatch(WebDriver driver,Excel ELObj) throws IOException
 	{
 		//Live Teams selected
-		
-		//driver.findElement(By.xpath("(//*[@class=\"text-hvr-underline text-bold\"])[1]")).click();
-		driver.findElement(By.linkText("Pakistan vs Bangladesh,")).click();
-		//driver.findElement(By.xpath("//*[@id=\"page-wrapper\"]/div[5]/div[1]/div[1]/div/div[1]/h3/a")).click();
-		//driver.findElement(By.xpath("//*[@id=\"page-wrapper\"]/div[5]/div[1]/div[2]/div/div[1]/h3/a")).click();
-		
+		//driver.findElement(By.xpath("//*[@id=\"page-wrapper\"]/div[5]/div[1]/div[3]/div/div[1]/h3/a")).click();
+		driver.findElement(By.xpath("//*[@id=\"page-wrapper\"]/div[5]/div[1]/div[1]/div/div[1]/h3/a")).click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		//Score board page
-		
 		driver.findElement(By.xpath("//*[@id=\"matchCenter\"]/div[2]/nav/a[2]")).click();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		 
 	    LiveScore ls = new LiveScore();
 	    System.out.println("Current Url: " + driver.getCurrentUrl());
+	    ELObj.toShtCrte("Live_Score");
 	    ls.liveUpdates1(driver, ELObj, driver.getCurrentUrl(), "Live Cricket Score, Commentary");
 	 }
 
@@ -43,7 +39,7 @@ public class LiveScore
 	 	CurrentMatches CMObj = new CurrentMatches(driver, cMatch);
 	 	
 	 	//Create Sheet and Rows in Excel
-	 	ELObj.toShtCrte("Live_Score");
+	 	
 	 	ELObj.rowCreation(rwNum++);
 	 	ELObj.cellFormatting("tijga");
 	 	ELObj.cellCreationAndWrite(0, CMObj.toSendDetails('a').toString());
@@ -314,6 +310,8 @@ public class LiveScore
 	 			ELObj.cellCreationAndWrite(j,CMObj.toSendDetails('m').toString());
 	 		else
 	 			ELObj.cellCreationAndWrite(j,"");
+	 		    ELObj.cellFormatting("cjigmqy");
+	 		    ELObj.cellFormatting("ldps");
 	 	}
 	 	ELObj.rowCreation(rwNum++);
 	 	
@@ -330,6 +328,6 @@ public class LiveScore
 	 	}
 	 	System.out.println("*****"+ status +"*****");
 	 	ELObj.fileCreation();
-	 	
+	 	liveUpdates1(driver, ELObj, driver.getCurrentUrl(), "Live Cricket Score, Commentary");
 	 }
 }
